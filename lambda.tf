@@ -7,7 +7,7 @@ data "archive_file" "lambda_zip"{
 
 resource "aws_lambda_function" "test_lambda"{
     filename = "lambda_function_payload.zip"
-    function_name = "test_lambda"
+    function_name = "test_lambda_new"
     role="${aws_iam_role.iam_for_lambda_tf.arn}"
     handler = "lambda.lambda_handler"
     runtime="python3.9"
