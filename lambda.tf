@@ -14,17 +14,13 @@ resource "aws_lambda_function" "test_lambda"{
     source_code_hash = "${data.archive_file.lambda_zip.output_base64sha256}"
 }
 
-#data "local_file" "custom_policy"{
-#    filename = "${path.module}/role_policy.json"
-#}
-
 data "local_file" "custom_policy"{
     filename = "${path.module}/role_policy.json"
 }
 
 
 resource "aws_iam_role" "iam_for_lambda_tf" {
-    name="iam_for_lambda_tf"
+    name="${var.function_name}_iam_for_lambda_tf"
     assume_role_policy=data.local_file.custom_policy.content
 }
 
