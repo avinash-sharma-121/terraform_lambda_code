@@ -1,7 +1,7 @@
 data "archive_file" "lambda_zip"{
     type="zip"
-    source_file="lambda.py"
-    output_path="lambda_function_payload.zip"
+    source_file="${path.module}/lambda.py"
+    output_path="${path.module}/lambda_function_payload.zip"
 }
 
 
@@ -19,7 +19,7 @@ resource "aws_lambda_function" "test_lambda"{
 #}
 
 data "local_file" "custom_policy"{
-    filename = "role_policy.json"
+    filename = "${path.module}/role_policy.json"
 }
 
 
@@ -29,5 +29,5 @@ resource "aws_iam_role" "iam_for_lambda_tf" {
 }
 
 output "lambda_function_details" {
-  value = aws_lambda_function.test_lambda
+  value = aws_lambda_function.test_lambda.arn
 }
