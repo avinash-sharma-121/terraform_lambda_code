@@ -6,7 +6,7 @@ data "archive_file" "lambda_zip"{
 
 
 resource "aws_lambda_function" "test_lambda"{
-    filename = "lambda_function_payload.zip"
+    filename = "${path.module}/lambda_function_payload.zip"
     function_name = var.function_name
     role="${aws_iam_role.iam_for_lambda_tf.arn}"
     handler = "lambda.lambda_handler"
