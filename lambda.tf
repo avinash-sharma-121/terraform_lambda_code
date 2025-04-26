@@ -12,7 +12,6 @@ resource "aws_lambda_function" "test_lambda"{
     handler = "lambda.lambda_handler"
     runtime="python3.9"
     source_code_hash = "${data.archive_file.lambda_zip.output_base64sha256}"
-
 }
 
 #data "local_file" "custom_policy"{
@@ -29,3 +28,6 @@ resource "aws_iam_role" "iam_for_lambda_tf" {
     assume_role_policy=data.local_file.custom_policy.content
 }
 
+output "lambda_function_details" {
+  value = aws_lambda_function.test_lambda
+}
